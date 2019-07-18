@@ -1,0 +1,96 @@
+// Task 1
+// In the Test.java file, declare an annotation named Test with a run-time retention policy, and that can only be applied to
+// methods.
+
+// Test.java
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.lang.annotation.ElementType;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD,})
+
+public @interface Test {}
+
+// Task 2
+// In the Test annotation, add two elements, named whatever you like, and having any valid return type that you like.
+// Be sure to specify defaults for both elements
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.lang.annotation.ElementType;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD,})
+
+public @interface Test {
+ String desc() default "";
+ String[] params() default {};
+}
+
+
+// Taks 3
+// Apply the @Test annotation to exactly three methods of the SocialNetworkTest class, specifying values for both elements 
+// in each of the three annotations (that is, don't rely on the element defaults).
+
+// SocialNetworkTest.java
+
+public class SocialNetworkTest {
+  public void testTweet() {
+    
+  }
+  @Test(
+    desc = "Baby Marla",
+    params = {"Is Having Fun"}
+  )
+  public void testInsta() { 
+    
+  }
+  @Test(
+    desc = "She likes to hold cookies",
+    params = {"As many as possible in each hand"}
+  )
+  public void testFacebook() { 
+    
+  }
+  @Test(
+    desc = "Whooo",
+    params = "Swinging chair!"
+  )
+  public void testPinterest() { 
+    
+  }
+
+  public void testSnapchat() { 
+    
+  }
+}
+
+// Task 4
+
+import java.lang.reflect.Method;
+
+public class TestAnalyzer {
+  /**
+   *  Counts the number of methods in the class given by `clazz` that have been annotated
+   *  with the @Test annotation.
+   */
+  public static int getNumAnnotatedMethods(Class<?> clazz) {
+    int counter = 0;
+    for (Method m : clazz.getMethods()) {
+      if (m.isAnnotationPresent(Test.class)) {
+        counter++;
+      }
+    }
+    return counter;  
+  }
+}
+
+     
+     
+     
+
+
